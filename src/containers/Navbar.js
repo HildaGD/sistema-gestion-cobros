@@ -25,11 +25,11 @@ function Navbar() {
                 <span className="navbar-toggler-icon"></span>
             </button>
 
-            <div className={"collapse navbar-collapse navbarCustomize " + show}>
+            {/* <div className={"collapse navbar-collapse navbarCustomize " + show}>
                 <div className="navbar-nav">
                     <a className="nav-item nav-link " href="/favoritePictures" >Favorite Pictures</a>
                 </div>
-            </div>
+            </div> */}
         </nav>
     );
 }

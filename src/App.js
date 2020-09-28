@@ -3,18 +3,19 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './containers/Navbar'
+import Login from './containers/Login'
 
 function App() {
   return (
     <Router>
        <div>
         <div className="App">
-          <Navbar></Navbar>
+          {/* <Navbar></Navbar> */}
         </div>
-        {/* <Switch>
-          <Route exact path='/'component={AstrologyPictureOfDay} />
-          <Route exact path='/favoritePictures'component={FavoritePictures} />
-        </Switch> */}
+        <Switch>
+          <Route exact path='/'component={Login} />
+          {/* <Route exact path='/favoritePictures'component={FavoritePictures} /> */}
+        </Switch>
       </div>
     </Router>
   );
