@@ -3,6 +3,7 @@ import './style.css'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import * as actions from '../store/actions/index';
+import conexion from '../services/index'
 
 function Login() {
     const [email, setEmail] = useState('')
@@ -20,12 +21,14 @@ function Login() {
     };
 
     useEffect(() => {
-        console.log(email)
+        handleValidatedForm()
 
     });
 
-    function handleValidatedForm(){
-        
+    async function  handleValidatedForm(){
+        const login = await conexion(email, password)
+        console.log(login)
+
     }
 
     return (
