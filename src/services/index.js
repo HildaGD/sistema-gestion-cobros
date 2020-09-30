@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const conexion = (name, surname) => 
-    axios.get(`http://127.0.0.1/proyecto/db.php`)
+    axios.get(`http://127.0.0.1/proyecto/getUser.php`)
     .then(response => {
         console.log(response)
         return Promise.resolve(response.data)
