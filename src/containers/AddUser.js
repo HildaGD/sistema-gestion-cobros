@@ -3,6 +3,7 @@ import './style.css'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import * as actions from '../store/actions/index';
+import Select from 'react-select'
 
 function AddUser() {
     const [name, setName] = useState('')
@@ -15,6 +16,7 @@ function AddUser() {
     const [phone, setPhone] = useState('')
     const [validated, setValidated] = useState(false);
 
+
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
@@ -24,12 +26,13 @@ function AddUser() {
 
         setValidated(true);
     };
-
+    
     useEffect(() => {
-       console.log(name)
+        console.log(name)
 
     });
 
+ 
     return (
         <div className="container">
             <div className="container-form" style={{ marginRight: '20%', marginTop: "15%" }}>
@@ -37,6 +40,16 @@ function AddUser() {
                     <Form.Group controlId="formBasicEmail">
             
                     </Form.Group>
+
+
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Tipo Usuario</Form.Label>
+                        <select>
+                        <option value="jefe">Jefe</option>
+                        <option value="supervisor">Supervisor</option>
+                        <option selected value="gestor">Gestor</option>
+                        </select>      
+                    </Form.Group>    
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Nombre</Form.Label>
@@ -64,7 +77,7 @@ function AddUser() {
                         <Form.Control.Feedback type="invalid">
                             Por favor, ingrese apellido
                         </Form.Control.Feedback>
-                    </Form.Group>
+                    </Form.Group>   
 
                 <Form.Group controlId="formBasicPassword">
                         <Form.Label>Contraseña</Form.Label>
@@ -153,7 +166,10 @@ function AddUser() {
                     <Button variant="primary" type="submit">
                         Agregar
                     </Button>
+
                 </Form>
+                
+        
             </div>
 
 
