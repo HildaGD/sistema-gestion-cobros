@@ -28,7 +28,6 @@ function Login() {
     async function  handleValidatedForm(){
         const login = await conexion(email, password)
         console.log(login)
-
     }
 
     return (
