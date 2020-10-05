@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import * as actions from '../store/actions/index';
+import conexion from '../services/index'
+import { useDispatch, useSelector } from 'react-redux'
 import './style.css'
 
-import * as actions from '../store/actions/index';
-import login from '../services/auth'
-import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+
 
 function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [validated, setValidated] = useState(false);
+ const [validated, setValidated] = useState(false);
     const dispatch = useDispatch();
-    // const login = useSelector(state => state.authentication.login)
-    const history = useHistory();
+    const login = useSelector(state => state.authentication.login)
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -23,19 +22,17 @@ function Login() {
             event.stopPropagation();
         }
 
-        history.push('/Home')
-
         setValidated(true);
     };
 
     useEffect(() => {
-          handleValidatedForm()
+        handleValidatedForm()
 
     });
 
-    async function handleValidatedForm() {
-        const log = await login(email, password)
-        console.log(log)
+    async function  handleValidatedForm(){
+        const login = await conexion(email, password)
+        console.log(login)
 
     }
 
@@ -45,9 +42,9 @@ function Login() {
                 <Form noValidate validated={validated} onSubmit={handleSubmit}>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Correo Electrónico</Form.Label>
-                        <Form.Control
-                            type="email"
-                            placeholder="Correo Electrónico"
+                        <Form.Control 
+                            type="email" 
+                            placeholder="Correo Electrónico" 
                             value={email}
                             onChange={e => setEmail(e.target.value)}
                             required
@@ -59,23 +56,19 @@ function Login() {
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Contraseña</Form.Label>
-                        <Form.Control
-                            type="password"
-                            placeholder="Contraseña"
+                        <Form.Control 
+                            type="password" 
+                            placeholder="Contraseña" 
                             value={password}
-                            onChange={e => setPassword(e.target.value)}
-                            required
+                            onChange={e=>setPassword(e.target.value)}
+                            required 
                         />
                         <Form.Control.Feedback type="invalid">
                             Por favor, ingrese contraseña
                         </Form.Control.Feedback>
                     </Form.Group>
 
-                    <Button
-                        variant="primary"
-                        type="submit"
-                        //onClick={() => handleValidatedForm(email, password)}
-                    >
+                    <Button variant="primary" type="submit">
                         Iniciar Sesión
                     </Button>
                 </Form>
