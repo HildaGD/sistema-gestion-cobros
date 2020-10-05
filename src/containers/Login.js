@@ -11,7 +11,7 @@ function Login() {
     const [password, setPassword] = useState('')
     const [validated, setValidated] = useState(false);
     const dispatch = useDispatch();
-    const login = useSelector(state => state.authentication.login)
+   // const login = useSelector(state => state.authentication.login)
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
