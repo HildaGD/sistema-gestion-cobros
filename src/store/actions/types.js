@@ -1,0 +1,12 @@
+//lOGIN
+export const AUTH_START = 'AUTH_START';
+export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+export const AUTH_FAIL = 'AUTH_FAIL';
+
+export const LOGOUT = 'LOGOUT';
+
+//REGISTER
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_FAILED = 'REGISTER_FAILED';
+export const REGISTER_REQUEST = 'REGISTER_REQUEST';
+

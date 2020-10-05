@@ -8,6 +8,16 @@
     /* background-color: black; */
 }
 
+.container-form{
+  border-style: solid;
+  border-radius: 15px;
+  border-color: white;
+  background-color:white;
+  padding: 50;
+  margin-left: 20%;
+  
+}
+
 body {
     display: -ms-flexbox;
     display: flex;
@@ -47,4 +57,3 @@ body {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
-  

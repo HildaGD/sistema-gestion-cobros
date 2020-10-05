@@ -1,0 +1,19 @@
+.navbarCustomize{
+    flex-grow: unset !important;
+}
+
+.imgCustomize{
+    width: 40px;
+    margin-right: 10px;
+    /* background-color: black; */
+}
+
+.container-form{
+  border-style: solid;
+  border-radius: 15px;
+  border-color: white;
+  background-color:white;
+  padding: 50;
+  margin-left: 20%;
+  
+}
