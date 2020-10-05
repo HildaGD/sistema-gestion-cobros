@@ -3,7 +3,7 @@ import './style.css'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import * as actions from '../store/actions/index';
-//import Select from 'react-select'
+import Select from 'react-select'
 
 function AddUser() {
     const [name, setName] = useState('')
@@ -44,11 +44,11 @@ function AddUser() {
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Tipo Usuario</Form.Label>
-                        <select>
+                        <Select>
                         <option value="jefe">Jefe</option>
                         <option value="supervisor">Supervisor</option>
                         <option selected value="gestor">Gestor</option>
-                        </select>      
+                        </Select>      
                     </Form.Group>    
 
                     <Form.Group controlId="formBasicPassword">
