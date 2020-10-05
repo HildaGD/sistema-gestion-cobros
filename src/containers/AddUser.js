@@ -3,7 +3,6 @@ import './style.css'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import * as actions from '../store/actions/index';
-import Select from 'react-select'
 
 function AddUser() {
     const [name, setName] = useState('')
@@ -37,22 +36,17 @@ function AddUser() {
     return (
         <div className="container">
             <div className="container-form" style={{ marginRight: '20%', marginTop: "15%" }}>
-                <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                    <Form.Group controlId="formBasicEmail">
-            
+                <Form noValidate validated={validated} onSubmit={handleSubmit}> 
+                    <Form.Group controlId="exampleForm.SelectCustom">
+                     <Form.Label>Tipo Usuario</Form.Label>
+                         <Form.Control as="select" custom>
+                            <option>Jefe</option>
+                            <option>Supervisor</option>
+                            <option>Gestor</option>
+                         </Form.Control>
                     </Form.Group>
-
-
-                    <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Tipo Usuario</Form.Label>
-                        <Select>
-                        <option value="jefe">Jefe</option>
-                        <option value="supervisor">Supervisor</option>
-                        <option selected value="gestor">Gestor</option>
-                        </Select>      
-                    </Form.Group>    
-
-                    <Form.Group controlId="formBasicPassword">
+  
+                    <Form.Group controlId="formBasicName">
                         <Form.Label>Nombre</Form.Label>
                         <Form.Control 
                             type="name" 
@@ -66,7 +60,7 @@ function AddUser() {
                         </Form.Control.Feedback>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicPassword">
+                    <Form.Group controlId="formBasicLastname">
                         <Form.Label>Apellido</Form.Label>
                         <Form.Control 
                             type="lastname" 
@@ -108,7 +102,7 @@ function AddUser() {
                         </Form.Control.Feedback>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicPassword">
+                    <Form.Group controlId="formBasicRepeatPassword">
                         <Form.Label>Repetir Contraseña</Form.Label>
                         <Form.Control 
                             type="repeatpassword" 
@@ -122,7 +116,7 @@ function AddUser() {
                         </Form.Control.Feedback>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail">
+                    <Form.Group controlId="formBasicIdentity">
                         <Form.Label>Identidad</Form.Label>
                         <Form.Control 
                             type="identity" 
@@ -136,19 +130,16 @@ function AddUser() {
                         </Form.Control.Feedback>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail">
+                    <Form.Group controlId="exampleForm.SelectCustom2">
                         <Form.Label>Agencia</Form.Label>
-                        <Form.Control 
-                            type="agency" 
-                            placeholder="Agencia" 
-                            value={agency}
-                            onChange={e => setAgency(e.target.value)}
-                            required
-                        />
-                        
+                        <Form.Control as="select" custom>
+                            <option>Agencia 1</option>
+                            <option>Agencia 2</option>
+                            <option>Agencia 3</option>
+                        </Form.Control>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail">
+                    <Form.Group controlId="formBasicDirection">
                         <Form.Label>Direccion</Form.Label>
                         <Form.Control 
                             type="direction" 
@@ -162,7 +153,7 @@ function AddUser() {
                         </Form.Control.Feedback>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail">
+                    <Form.Group controlId="formBasicPhone">
                         <Form.Label>Telefono</Form.Label>
                         <Form.Control 
                             type="phone" 
