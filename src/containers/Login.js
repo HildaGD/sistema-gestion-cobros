@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
-import './style.css'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import * as actions from '../store/actions/index';
 import conexion from '../services/index'
+import { useDispatch, useSelector } from 'react-redux'
+import './style.css'
+
+
 
 function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [validated, setValidated] = useState(false);
+ const [validated, setValidated] = useState(false);
+    const dispatch = useDispatch();
+   // const login = useSelector(state => state.authentication.login)
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -70,6 +75,7 @@ function Login() {
 
 
         </div>
+
     );
 }
 
