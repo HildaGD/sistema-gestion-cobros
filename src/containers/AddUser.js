@@ -3,7 +3,7 @@ import './style.css'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import * as actions from '../store/actions/index';
-import Select from 'react-select'
+//import Select from 'react-select'
 
 function AddUser() {
     const [name, setName] = useState('')
