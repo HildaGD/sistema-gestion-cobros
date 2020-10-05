@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './containers/Login'
 import Home from './containers/Home'
 import AddUser from './containers/AddUser'
-import EdditUser from './containers/EditUser'
+import EditUser from './containers/EditUser'
 import PrivateRoute from './shared/PrivateRoute'
 
 function App() {
