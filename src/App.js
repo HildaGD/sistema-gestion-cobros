@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './containers/Login'
 import Home from './containers/Home'
 import AddUser from './containers/AddUser'
-import AddUser from './containers/EditUser'
+import EdditUser from './containers/EditUser'
 import PrivateRoute from './shared/PrivateRoute'
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
           <Route exact path='/'component={Login} />
           <PrivateRoute exact path='/Home'component={Home} />
           <PrivateRoute exact path='/AddUser'component={AddUser} /> 
-          <PrivateRoute exact path='/AddUser'component={EditUser} /> 
+          <PrivateRoute exact path='/EditUser'component={EditUser} /> 
         </Switch>
       </div>
     </Router>
