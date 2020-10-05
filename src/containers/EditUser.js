@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button'
 import * as actions from '../store/actions/index';
 import Select from 'react-select'
 
-function AddUser() {
+function EditUser() {
     const [name, setName] = useState('')
     const [lastname, setLastname] = useState('')
     const [password, setPassword] = useState('')
@@ -145,7 +145,7 @@ function AddUser() {
                             required
                         />
                         <Form.Control.Feedback type="invalid">
-                            Por favor, ingrese direccion
+                            Por favor, ingrese al menos una direccion
                         </Form.Control.Feedback>
                     </Form.Group>
 
@@ -159,7 +159,7 @@ function AddUser() {
                             required
                         />
                         <Form.Control.Feedback type="invalid">
-                            Por favor, ingrese telefono
+                            Por favor, ingrese al menos un telefono
                         </Form.Control.Feedback>
                     </Form.Group>
 
