@@ -11,7 +11,6 @@ function AddUser() {
     const [password, setPassword] = useState('')
     const [repeatpassword, setRepeatpassword] = useState('')
     const [identity, setIdentity] = useState('')
-    const [agency, setAgency] = useState('')
     const [direction, setDirection] = useState('')
     const [phone, setPhone] = useState('')
     const [validated, setValidated] = useState(false);
@@ -105,7 +104,7 @@ function AddUser() {
                     <Form.Group controlId="formBasicRepeatPassword">
                         <Form.Label>Repetir Contraseña</Form.Label>
                         <Form.Control 
-                            type="repeatpassword" 
+                            type="password" 
                             placeholder="Confirme Contraseña" 
                             value={repeatpassword}
                             onChange={e=>setRepeatpassword(e.target.value)}
