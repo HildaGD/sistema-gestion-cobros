@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import BootstrapTable from 'react-bootstrap-table-next'
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit'
 import paginationFactory, {
     PaginationProvider,
 } from 'react-bootstrap-table2-paginator';
+import { Button } from 'react-bootstrap'
 import getListUsers from '../services/getListUsers'
 
-const UsersTable = () => {
+function UsersTable() {
     const { SearchBar } = Search
-    const userList =  []//handleGetListUsers()
-   
+    const [userList, setUserList] = useState([])
     const columns = [
         {
             dataField: 'id_user',
@@ -27,6 +27,14 @@ const UsersTable = () => {
         {
             dataField: '',
             text: '',
+            formatter: (rowContent, row, rowIndex) => {
+                return (
+                    <div>
+                       <Button variant="danger"> Editar</Button>
+                       <Button > Mostrar</Button>
+                    </div>
+                )
+            }
         }
     ];
 
@@ -34,6 +42,10 @@ const UsersTable = () => {
         dataField: 'id_user',
         order: 'asc'
     }]
+
+    useEffect(() => {
+        handleGetListUsers()
+    });
 
     function customMatchFunc({
         searchText,
@@ -45,13 +57,12 @@ const UsersTable = () => {
         return false;
     }
 
-    // async function handleGetListUsers(){
-    //     let dataUsers =[];
-    //      dataUsers = await getListUsers()
-    //     return dataUsers
-       
-    // } 
-    
+    async function handleGetListUsers() {
+        let dataUsers = await getListUsers()
+        setUserList(dataUsers)
+
+    }
+
     return (
         <div className='container mt-4'>
             <ToolkitProvider
@@ -83,7 +94,7 @@ const UsersTable = () => {
                         >
                             {
                                 ({
-                        
+
                                     paginationTableProps
                                 }) => (
                                         <div>
