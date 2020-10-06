@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import BootstrapTable from 'react-bootstrap-table-next'
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit'
 import paginationFactory, {
     PaginationProvider,
-    PaginationListStandalone,
 } from 'react-bootstrap-table2-paginator';
 import getListUsers from '../services/getListUsers'
 
 const UsersTable = () => {
     const { SearchBar } = Search
-    const [userList, setUserList] = useState([]);
-    handleGetListUsers()
+    const userList =  []//handleGetListUsers()
+   
     const columns = [
         {
             dataField: 'id_user',
-            text: '',
+            text: 'id',
         },
         {
             dataField: 'email',
@@ -24,11 +23,15 @@ const UsersTable = () => {
         {
             dataField: 'password',
             text: 'Contraseña',
+        },
+        {
+            dataField: '',
+            text: '',
         }
     ];
 
     const defaultSorted = [{
-        dataField: 'email',
+        dataField: 'id_user',
         order: 'asc'
     }]
 
@@ -42,11 +45,12 @@ const UsersTable = () => {
         return false;
     }
 
-    async function handleGetListUsers(){
-        const dataUsers = await getListUsers()
-        setUserList(dataUsers)
-       // console.log('DATOS DE USUARIOS', dataUsers.data)
-    } 
+    // async function handleGetListUsers(){
+    //     let dataUsers =[];
+    //      dataUsers = await getListUsers()
+    //     return dataUsers
+       
+    // } 
     
     return (
         <div className='container mt-4'>
@@ -79,21 +83,16 @@ const UsersTable = () => {
                         >
                             {
                                 ({
-                                    paginationProps,
+                        
                                     paginationTableProps
                                 }) => (
                                         <div>
-
-
                                             <BootstrapTable
                                                 keyField="id"
                                                 data={userList}
                                                 columns={columns}
                                                 {...paginationTableProps}
                                                 defaultSorted={defaultSorted}
-                                            />
-                                            <PaginationListStandalone
-                                                {...paginationProps}
                                             />
                                         </div>
                                     )
