@@ -1,28 +1,35 @@
 import React, { useEffect, useState } from "react";
 
 import BootstrapTable from 'react-bootstrap-table-next'
-import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit'
+import ToolkitProvider, {  Search } from 'react-bootstrap-table2-toolkit'
 import paginationFactory, {
     PaginationProvider,
 } from 'react-bootstrap-table2-paginator';
 import { Button } from 'react-bootstrap'
 import getListUsers from '../services/getListUsers'
+import { useHistory } from 'react-router-dom'
 
 function UsersTable() {
+    const history = useHistory();
     const { SearchBar } = Search
     const [userList, setUserList] = useState([])
+    
     const columns = [
         {
             dataField: 'id_user',
             text: 'id',
+            sort: false
         },
         {
             dataField: 'email',
             text: 'Correo Electrónico',
+            
+            sort: false
         },
         {
             dataField: 'password',
             text: 'Contraseña',
+            sort: false
         },
         {
             dataField: '',
@@ -30,8 +37,8 @@ function UsersTable() {
             formatter: (rowContent, row, rowIndex) => {
                 return (
                     <div>
-                       <Button variant="danger"> Editar</Button>
-                       <Button > Mostrar</Button>
+                        <Button variant="danger"> Editar</Button>
+                        <Button onClick={()=> history.push('/ViewUser',row)}> Mostrar</Button>
                     </div>
                 )
             }
@@ -63,13 +70,16 @@ function UsersTable() {
 
     }
 
+ 
+
     return (
         <div className='container mt-4'>
             <ToolkitProvider
-                keyField='index'
+                keyField='id_user'
                 data={userList}
                 columns={columns}
                 search={{ customMatchFunc }}
+           
             >
 
                 {props => (
@@ -94,16 +104,19 @@ function UsersTable() {
                         >
                             {
                                 ({
-
+                                    
                                     paginationTableProps
                                 }) => (
                                         <div>
                                             <BootstrapTable
+                                                bootstrap4
+                                                classes="table table-striped table-hover react-bs-table-tool-bar"
                                                 keyField="id"
                                                 data={userList}
                                                 columns={columns}
                                                 {...paginationTableProps}
                                                 defaultSorted={defaultSorted}
+                                                {...props.baseProps}
                                             />
                                         </div>
                                     )
