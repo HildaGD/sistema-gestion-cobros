@@ -4,18 +4,17 @@ import BootstrapTable from 'react-bootstrap-table-next'
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit'
 import paginationFactory, {
     PaginationProvider,
-    PaginationListStandalone,
 } from 'react-bootstrap-table2-paginator';
+import { Button } from 'react-bootstrap'
 import getListUsers from '../services/getListUsers'
 
-const UsersTable = () => {
+function UsersTable() {
     const { SearchBar } = Search
-    const [userList, setUserList] = useState([]);
-    handleGetListUsers()
+    const [userList, setUserList] = useState([])
     const columns = [
         {
             dataField: 'id_user',
-            text: '',
+            text: 'id',
         },
         {
             dataField: 'email',
@@ -24,13 +23,29 @@ const UsersTable = () => {
         {
             dataField: 'password',
             text: 'Contraseña',
+        },
+        {
+            dataField: '',
+            text: '',
+            formatter: (rowContent, row, rowIndex) => {
+                return (
+                    <div>
+                       <Button variant="danger"> Editar</Button>
+                       <Button > Mostrar</Button>
+                    </div>
+                )
+            }
         }
     ];
 
     const defaultSorted = [{
-        dataField: 'email',
+        dataField: 'id_user',
         order: 'asc'
     }]
+
+    useEffect(() => {
+        handleGetListUsers()
+    });
 
     function customMatchFunc({
         searchText,
@@ -42,12 +57,12 @@ const UsersTable = () => {
         return false;
     }
 
-    async function handleGetListUsers(){
-        const dataUsers = await getListUsers()
+    async function handleGetListUsers() {
+        let dataUsers = await getListUsers()
         setUserList(dataUsers)
-       // console.log('DATOS DE USUARIOS', dataUsers.data)
-    } 
-    
+
+    }
+
     return (
         <div className='container mt-4'>
             <ToolkitProvider
@@ -79,21 +94,16 @@ const UsersTable = () => {
                         >
                             {
                                 ({
-                                    paginationProps,
+
                                     paginationTableProps
                                 }) => (
                                         <div>
-
-
                                             <BootstrapTable
                                                 keyField="id"
                                                 data={userList}
                                                 columns={columns}
                                                 {...paginationTableProps}
                                                 defaultSorted={defaultSorted}
-                                            />
-                                            <PaginationListStandalone
-                                                {...paginationProps}
                                             />
                                         </div>
                                     )
