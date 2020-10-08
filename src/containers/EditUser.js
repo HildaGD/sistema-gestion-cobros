@@ -29,14 +29,30 @@ function EditUser(props) {
 
         });
 
-
-        const handleChangeValues = (event) => {
+        const handleChangeValues = () => {
+            let ena = props.location.state.name
+            let last = props.location.state.lastname
             let em = props.location.state.email
             let pass = props.location.state.password
+            let repeat = props.location.state.repeatpassword
+            let ident = props.location.state.identity
+            let agen = props.location.state.agency
+            let dirr = props.location.state.direction
+            let pho = props.location.state.phone
+            let val = props.location.state.validated
+            let selec = props.location.state.selectedDate
             console.log(props)
+            setName(ena)
+            setLastname(last)
             setEmail(em)
             setPassword(pass)
-            
+            setRepeatpassword(repeat)
+            setIdentity(ident)
+            setAgency(agen)
+            setDirection(dirr)
+            setPhone(pho)
+            setValidated(val)
+            setselectedDate(selec)       
         }
         
 
@@ -59,7 +75,7 @@ function EditUser(props) {
                             <Form.Label>Nombre</Form.Label>
                             <Form.Control 
                                 type="name" 
-                                placeholder="Ingrese Nombre" 
+                                placeholder="Edite Nombre" 
                                 value={name}
                                 onChange={e => setName(e.target.value)}
                                 required
@@ -73,7 +89,7 @@ function EditUser(props) {
                             <Form.Label>Apellido</Form.Label>
                             <Form.Control 
                                 type="lastname" 
-                                placeholder="Ingrese Apellido" 
+                                placeholder="Edite Apellido" 
                                 value={lastname}
                                 onChange={e=>setLastname(e.target.value)}
                                 required 
@@ -87,7 +103,7 @@ function EditUser(props) {
                             <Form.Label>Correo Electrónico</Form.Label>
                             <Form.Control 
                                 type="email" 
-                                placeholder="Correo Electrónico" 
+                                placeholder="Edite Correo Electrónico" 
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
                                 required
@@ -99,22 +115,22 @@ function EditUser(props) {
     
                     <Form.Group controlId="formBasicPassword">
                             <Form.Label>Contraseña</Form.Label>
-                            <Form.Control 
+                            <Form.Control
                                 type="password" 
-                                placeholder="Contraseña" 
+                                placeholder="Edite Contraseña" 
                                 value={password}
-                                onChange={e=>setPassword(e.target.value)}
+                                // onChange={e=>setPassword(e.target.value)}
                                 required 
                             />
                             <Form.Control.Feedback type="invalid">
                                 Por favor, ingrese contraseña
                             </Form.Control.Feedback>
                         </Form.Group>
-    
+
                         <Form.Group controlId="formBasicRepeatPassword">
                             <Form.Label>Repetir Contraseña</Form.Label>
                             <Form.Control 
-                                type="repeatpassword" 
+                                type="password" 
                                 placeholder="Confirme Contraseña" 
                                 value={repeatpassword}
                                 onChange={e=>setRepeatpassword(e.target.value)}
@@ -129,7 +145,7 @@ function EditUser(props) {
                             <Form.Label>Identidad</Form.Label>
                             <Form.Control 
                                 type="identity" 
-                                placeholder="Identidad" 
+                                placeholder="Edite Identidad" 
                                 value={identity}
                                 onChange={e => setIdentity(e.target.value)}
                                 required
@@ -168,7 +184,7 @@ function EditUser(props) {
                             <Form.Label>Direccion</Form.Label>
                             <Form.Control 
                                 type="direction" 
-                                placeholder="Direccion" 
+                                placeholder="Edite Direccion" 
                                 value={direction}
                                 onChange={e => setDirection(e.target.value)}
                                 required
@@ -182,7 +198,7 @@ function EditUser(props) {
                             <Form.Label>Telefono</Form.Label>
                             <Form.Control 
                                 type="phone" 
-                                placeholder="Telefono" 
+                                placeholder="Edite Telefono" 
                                 value={phone}
                                 onChange={e => setPhone(e.target.value)}
                                 required
