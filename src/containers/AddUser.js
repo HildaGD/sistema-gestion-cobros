@@ -3,19 +3,21 @@ import './style.css'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import * as actions from '../store/actions/index';
-//import Select from 'react-select'
+import Card from 'react-bootstrap/Card'
+import DatePicker from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css";
 
 function AddUser() {
     const [name, setName] = useState('')
     const [lastname, setLastname] = useState('')
-    const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [repeatpassword, setRepeatpassword] = useState('')
     const [identity, setIdentity] = useState('')
-    const [zone, setZone] = useState('')
     const [direction, setDirection] = useState('')
     const [phone, setPhone] = useState('')
     const [validated, setValidated] = useState(false);
-
+    const [selectedDate, setselectedDate] = useState(null)
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -32,26 +34,21 @@ function AddUser() {
 
     });
 
- 
+
     return (
         <div className="container">
             <div className="container-form" style={{ marginRight: '20%', marginTop: "15%" }}>
-                <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                    <Form.Group controlId="formBasicEmail">
-            
+                <Form noValidate validated={validated} onSubmit={handleSubmit}> 
+                    <Form.Group controlId="exampleForm.SelectCustom">
+                     <Form.Label>Tipo Usuario</Form.Label>
+                         <Form.Control as="select" custom>
+                            <option>Jefe</option>
+                            <option>Supervisor</option>
+                            <option>Gestor</option>
+                         </Form.Control>
                     </Form.Group>
-
-
-                    <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Tipo Usuario</Form.Label>
-                        <select>
-                        <option value="jefe">Jefe</option>
-                        <option value="supervisor">Supervisor</option>
-                        <option selected value="gestor">Gestor</option>
-                        </select>      
-                    </Form.Group>    
-
-                    <Form.Group controlId="formBasicPassword">
+  
+                    <Form.Group controlId="formBasicName">
                         <Form.Label>Nombre</Form.Label>
                         <Form.Control 
                             type="name" 
@@ -65,7 +62,7 @@ function AddUser() {
                         </Form.Control.Feedback>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicPassword">
+                    <Form.Group controlId="formBasicLastname">
                         <Form.Label>Apellido</Form.Label>
                         <Form.Control 
                             type="lastname" 
@@ -77,7 +74,21 @@ function AddUser() {
                         <Form.Control.Feedback type="invalid">
                             Por favor, ingrese apellido
                         </Form.Control.Feedback>
-                    </Form.Group>   
+                    </Form.Group>  
+
+                     <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Correo Electrónico</Form.Label>
+                        <Form.Control 
+                            type="email" 
+                            placeholder="Correo Electrónico" 
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                            required
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            Por favor, ingrese correo electrónico
+                        </Form.Control.Feedback>
+                    </Form.Group> 
 
                 <Form.Group controlId="formBasicPassword">
                         <Form.Label>Contraseña</Form.Label>
@@ -93,21 +104,21 @@ function AddUser() {
                         </Form.Control.Feedback>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Correo Electrónico</Form.Label>
+                    <Form.Group controlId="formBasicRepeatPassword">
+                        <Form.Label>Repetir Contraseña</Form.Label>
                         <Form.Control 
-                            type="email" 
-                            placeholder="Correo Electrónico" 
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
-                            required
+                            type="password" 
+                            placeholder="Confirme Contraseña" 
+                            value={repeatpassword}
+                            onChange={e=>setRepeatpassword(e.target.value)}
+                            required 
                         />
                         <Form.Control.Feedback type="invalid">
-                            Por favor, ingrese correo electrónico
+                            Por favor, confirme contraseña
                         </Form.Control.Feedback>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail">
+                    <Form.Group controlId="formBasicIdentity">
                         <Form.Label>Identidad</Form.Label>
                         <Form.Control 
                             type="identity" 
@@ -121,21 +132,32 @@ function AddUser() {
                         </Form.Control.Feedback>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Zona</Form.Label>
-                        <Form.Control 
-                            type="zone" 
-                            placeholder="Zona" 
-                            value={zone}
-                            onChange={e => setZone(e.target.value)}
-                            required
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            Por favor, ingrese Zona
-                        </Form.Control.Feedback>
+                    <Card>
+                        <Card.Body>
+                            <Card.Text>Seleccione la fecha de nacimiento</Card.Text>
+                            <DatePicker
+                                selected={selectedDate}
+                                onChange={date => setselectedDate(date)}
+                                dateFormat = 'dd/MM/yyyy'
+                                maxDate={new Date()}
+                                filterDate = {date => date.getDate() !=6 && date.getDay !=0}
+                                isClearable
+                                showYearDropdown
+                                scrollableMonthYearDropdown
+                            />
+                        </Card.Body>
+                    </Card>
+
+                    <Form.Group controlId="exampleForm.SelectCustom2">
+                        <Form.Label>Agencia</Form.Label>
+                        <Form.Control as="select" custom>
+                            <option>Agencia 1</option>
+                            <option>Agencia 2</option>
+                            <option>Agencia 3</option>
+                        </Form.Control>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail">
+                    <Form.Group controlId="formBasicDirection">
                         <Form.Label>Direccion</Form.Label>
                         <Form.Control 
                             type="direction" 
@@ -149,7 +171,7 @@ function AddUser() {
                         </Form.Control.Feedback>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail">
+                    <Form.Group controlId="formBasicPhone">
                         <Form.Label>Telefono</Form.Label>
                         <Form.Control 
                             type="phone" 
