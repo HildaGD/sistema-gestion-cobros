@@ -3,9 +3,13 @@ import './style.css'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import * as actions from '../store/actions/index';
-import Select from 'react-select'
+import Card from 'react-bootstrap/Card'
+import DatePicker from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css";
+import { useLocation } from "react-router-dom";
+import Navbar from '../components/Navbar'
 
-function EditUser() {
+function EditUser(props) {
         const [name, setName] = useState('')
         const [lastname, setLastname] = useState('')
         const [email, setEmail] = useState('')
@@ -15,29 +19,49 @@ function EditUser() {
         const [agency, setAgency] = useState('')
         const [direction, setDirection] = useState('')
         const [phone, setPhone] = useState('')
-        const [validated, setValidated] = useState(false);
-    
-    
-        const handleSubmit = (event) => {
-            const form = event.currentTarget;
-            if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-    
-            setValidated(true);
-        };
+        const [validated, setValidated] = useState(false)
+        const [selectedDate, setselectedDate] = useState(null)
+        const location = useLocation();
         
+
         useEffect(() => {
-            console.log(name)
-    
+             handleChangeValues()
+
         });
-    
-     
+
+        const handleChangeValues = () => {
+            let ena = props.location.state.name
+            let last = props.location.state.lastname
+            let em = props.location.state.email
+            let pass = props.location.state.password
+            let repeat = props.location.state.repeatpassword
+            let ident = props.location.state.identity
+            let agen = props.location.state.agency
+            let dirr = props.location.state.direction
+            let pho = props.location.state.phone
+            let val = props.location.state.validated
+            let selec = props.location.state.selectedDate
+            console.log(props)
+            setName(ena)
+            setLastname(last)
+            setEmail(em)
+            setPassword(pass)
+            setRepeatpassword(repeat)
+            setIdentity(ident)
+            setAgency(agen)
+            setDirection(dirr)
+            setPhone(pho)
+            setValidated(val)
+            setselectedDate(selec)       
+        }
+        
+
         return (
+        <div>
+            <Navbar />
             <div className="container">
                 <div className="container-form" style={{ marginRight: '20%', marginTop: "15%" }}>
-                    <Form noValidate validated={validated} onSubmit={handleSubmit}> 
+                    <Form noValidate validated={validated} onSubmit={handleChangeValues}> 
                         <Form.Group controlId="exampleForm.SelectCustom">
                          <Form.Label>Tipo Usuario</Form.Label>
                              <Form.Control as="select" custom>
@@ -51,7 +75,7 @@ function EditUser() {
                             <Form.Label>Nombre</Form.Label>
                             <Form.Control 
                                 type="name" 
-                                placeholder="Ingrese Nombre" 
+                                placeholder="Edite Nombre" 
                                 value={name}
                                 onChange={e => setName(e.target.value)}
                                 required
@@ -65,7 +89,7 @@ function EditUser() {
                             <Form.Label>Apellido</Form.Label>
                             <Form.Control 
                                 type="lastname" 
-                                placeholder="Ingrese Apellido" 
+                                placeholder="Edite Apellido" 
                                 value={lastname}
                                 onChange={e=>setLastname(e.target.value)}
                                 required 
@@ -79,7 +103,7 @@ function EditUser() {
                             <Form.Label>Correo Electrónico</Form.Label>
                             <Form.Control 
                                 type="email" 
-                                placeholder="Correo Electrónico" 
+                                placeholder="Edite Correo Electrónico" 
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
                                 required
@@ -91,22 +115,22 @@ function EditUser() {
     
                     <Form.Group controlId="formBasicPassword">
                             <Form.Label>Contraseña</Form.Label>
-                            <Form.Control 
+                            <Form.Control
                                 type="password" 
-                                placeholder="Contraseña" 
+                                placeholder="Edite Contraseña" 
                                 value={password}
-                                onChange={e=>setPassword(e.target.value)}
+                                // onChange={e=>setPassword(e.target.value)}
                                 required 
                             />
                             <Form.Control.Feedback type="invalid">
                                 Por favor, ingrese contraseña
                             </Form.Control.Feedback>
                         </Form.Group>
-    
+
                         <Form.Group controlId="formBasicRepeatPassword">
                             <Form.Label>Repetir Contraseña</Form.Label>
                             <Form.Control 
-                                type="repeatpassword" 
+                                type="password" 
                                 placeholder="Confirme Contraseña" 
                                 value={repeatpassword}
                                 onChange={e=>setRepeatpassword(e.target.value)}
@@ -121,7 +145,7 @@ function EditUser() {
                             <Form.Label>Identidad</Form.Label>
                             <Form.Control 
                                 type="identity" 
-                                placeholder="Identidad" 
+                                placeholder="Edite Identidad" 
                                 value={identity}
                                 onChange={e => setIdentity(e.target.value)}
                                 required
@@ -130,7 +154,23 @@ function EditUser() {
                                 Por favor, ingrese Identidad
                             </Form.Control.Feedback>
                         </Form.Group>
-    
+                        
+                        <Card>
+                        <Card.Body>
+                            <Card.Text>Seleccione la fecha de nacimiento</Card.Text>
+                            <DatePicker
+                                selected={selectedDate}
+                                onChange={date => setselectedDate(date)}
+                                dateFormat = 'dd/MM/yyyy'
+                                maxDate={new Date()}
+                                filterDate = {date => date.getDate() !=6 && date.getDay !=0}
+                                isClearable
+                                showYearDropdown
+                                scrollableMonthYearDropdown
+                            />
+                        </Card.Body>
+                    </Card>
+
                         <Form.Group controlId="exampleForm.SelectCustom2">
                             <Form.Label>Agencia</Form.Label>
                             <Form.Control as="select" custom>
@@ -144,7 +184,7 @@ function EditUser() {
                             <Form.Label>Direccion</Form.Label>
                             <Form.Control 
                                 type="direction" 
-                                placeholder="Direccion" 
+                                placeholder="Edite Direccion" 
                                 value={direction}
                                 onChange={e => setDirection(e.target.value)}
                                 required
@@ -158,7 +198,7 @@ function EditUser() {
                             <Form.Label>Telefono</Form.Label>
                             <Form.Control 
                                 type="phone" 
-                                placeholder="Telefono" 
+                                placeholder="Edite Telefono" 
                                 value={phone}
                                 onChange={e => setPhone(e.target.value)}
                                 required
@@ -189,6 +229,9 @@ function EditUser() {
     
     
             </div>
+
+        </div>
+
         );
     }
       

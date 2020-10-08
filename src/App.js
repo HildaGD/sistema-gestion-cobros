@@ -9,7 +9,7 @@ import AddUser from './containers/AddUser'
 import EditUser from './containers/EditUser'
 import ListUsers from './containers/ListUser'
 import ViewUser from './containers/ViewUser'
-//import Footer from './components/Footer'
+import Footer from './components/Footer'
 
 function App() {
   return (
