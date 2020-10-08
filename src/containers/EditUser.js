@@ -3,9 +3,13 @@ import './style.css'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import * as actions from '../store/actions/index';
-import Select from 'react-select'
+import Card from 'react-bootstrap/Card'
+import DatePicker from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css";
+import { useLocation } from "react-router-dom";
+import Navbar from '../components/Navbar'
 
-function EditUser() {
+function EditUser(props) {
         const [name, setName] = useState('')
         const [lastname, setLastname] = useState('')
         const [email, setEmail] = useState('')
@@ -15,29 +19,33 @@ function EditUser() {
         const [agency, setAgency] = useState('')
         const [direction, setDirection] = useState('')
         const [phone, setPhone] = useState('')
-        const [validated, setValidated] = useState(false);
-    
-    
-        const handleSubmit = (event) => {
-            const form = event.currentTarget;
-            if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-    
-            setValidated(true);
-        };
+        const [validated, setValidated] = useState(false)
+        const [selectedDate, setselectedDate] = useState(null)
+        const location = useLocation();
         
+
         useEffect(() => {
-            console.log(name)
-    
+             handleChangeValues()
+
         });
-    
-     
+
+
+        const handleChangeValues = (event) => {
+            let em = props.location.state.email
+            let pass = props.location.state.password
+            console.log(props)
+            setEmail(em)
+            setPassword(pass)
+            
+        }
+        
+
         return (
+        <div>
+            <Navbar />
             <div className="container">
                 <div className="container-form" style={{ marginRight: '20%', marginTop: "15%" }}>
-                    <Form noValidate validated={validated} onSubmit={handleSubmit}> 
+                    <Form noValidate validated={validated} onSubmit={handleChangeValues}> 
                         <Form.Group controlId="exampleForm.SelectCustom">
                          <Form.Label>Tipo Usuario</Form.Label>
                              <Form.Control as="select" custom>
@@ -130,7 +138,23 @@ function EditUser() {
                                 Por favor, ingrese Identidad
                             </Form.Control.Feedback>
                         </Form.Group>
-    
+                        
+                        <Card>
+                        <Card.Body>
+                            <Card.Text>Seleccione la fecha de nacimiento</Card.Text>
+                            <DatePicker
+                                selected={selectedDate}
+                                onChange={date => setselectedDate(date)}
+                                dateFormat = 'dd/MM/yyyy'
+                                maxDate={new Date()}
+                                filterDate = {date => date.getDate() !=6 && date.getDay !=0}
+                                isClearable
+                                showYearDropdown
+                                scrollableMonthYearDropdown
+                            />
+                        </Card.Body>
+                    </Card>
+
                         <Form.Group controlId="exampleForm.SelectCustom2">
                             <Form.Label>Agencia</Form.Label>
                             <Form.Control as="select" custom>
@@ -189,6 +213,9 @@ function EditUser() {
     
     
             </div>
+
+        </div>
+
         );
     }
       

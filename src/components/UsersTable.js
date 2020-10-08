@@ -37,7 +37,7 @@ function UsersTable() {
             formatter: (rowContent, row, rowIndex) => {
                 return (
                     <div>
-                        <Button variant="danger"> Editar</Button>
+                        <Button variant="danger" onClick={()=> history.push('/EditUser',row)}>  Editar</Button>
                         <Button onClick={()=> history.push('/ViewUser',row)}> Mostrar</Button>
                     </div>
                 )
